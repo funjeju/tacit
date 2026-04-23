@@ -160,7 +160,7 @@ export default function StudioPage() {
                   {examples.map((ex) => (
                     <span
                       key={ex}
-                      className="rounded-full bg-muted px-2.5 py-0.5 text-xs text-muted-foreground"
+                      className="rounded-full border border-border bg-background px-2.5 py-0.5 text-xs text-foreground/70 group-hover:border-accent/30 group-hover:text-accent transition-colors"
                     >
                       {ex}
                     </span>
