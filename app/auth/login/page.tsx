@@ -1,25 +1,38 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { signInWithGoogle } from '@/lib/firebase/auth';
+import { signInWithGoogle, handleRedirectResult } from '@/lib/firebase/auth';
 import { Loader2, ArrowLeft } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get('redirect') ?? '/studio';
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Google redirect 로그인 후 결과 처리
+  useEffect(() => {
+    handleRedirectResult()
+      .then((user) => {
+        if (user) router.replace(redirect);
+        else setLoading(false);
+      })
+      .catch(() => {
+        setError('로그인에 실패했어요. 다시 시도해 주세요.');
+        setLoading(false);
+      });
+  }, [redirect, router]);
 
   async function handleGoogleLogin() {
     setLoading(true);
     setError(null);
     try {
-      await signInWithGoogle();
-      router.push('/studio');
-    } catch (e) {
+      await signInWithGoogle(); // redirect — 이 줄 이후 실행 안 됨
+    } catch {
       setError('로그인에 실패했어요. 다시 시도해 주세요.');
-    } finally {
       setLoading(false);
     }
   }
@@ -27,7 +40,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
       <div className="w-full max-w-sm">
-        {/* 로고 */}
         <div className="mb-8 text-center">
           <Link href="/" className="inline-block">
             <span className="text-3xl font-bold text-foreground">Tacit</span>
@@ -46,7 +58,6 @@ export default function LoginPage() {
             </div>
           )}
 
-          {/* Google 로그인 */}
           <button
             onClick={handleGoogleLogin}
             disabled={loading}
