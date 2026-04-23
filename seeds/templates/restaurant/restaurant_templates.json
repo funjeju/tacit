@@ -1,0 +1,348 @@
+[
+  {
+    "id": "restaurant_new_menu_poster",
+    "domainId": "restaurant",
+    "subtype": "모든 식당",
+    "outputType": "image",
+    "name": "신메뉴 포스터 만들기",
+    "description": "가게 앞에 붙일 A4 포스터용 이미지 주문서 생성",
+    "estimatedTime": "3~5분",
+    "assemblyPromptKey": "image_marketing_poster",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "어떤 메뉴의 포스터인가요?",
+        "type": "text",
+        "category": "purpose",
+        "placeholder": "예: 여름 한정 냉국수, 신메뉴 갈비찜",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "그 메뉴의 핵심 재료 3가지만 알려주세요",
+        "type": "text",
+        "category": "content",
+        "placeholder": "예: 해산물, 시금치, 참기름",
+        "hint": "가장 눈에 띄는 재료를 쓰면 더 정확해져요",
+        "required": false,
+        "skippable": true
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "어떤 분위기의 포스터가 좋으세요?",
+        "type": "choice",
+        "category": "style",
+        "options": [
+          { "value": "appetizing", "label": "침 넘어가는 먹음직한 느낌" },
+          { "value": "premium", "label": "고급스럽고 깔끔한 느낌" },
+          { "value": "homey", "label": "따뜻하고 정겨운 집밥 느낌" },
+          { "value": "trendy", "label": "젊은 사람에게 어필하는 트렌디한 느낌" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q4",
+        "order": 4,
+        "text": "누구에게 보여주고 싶은 포스터인가요?",
+        "type": "multichoice",
+        "category": "audience",
+        "options": [
+          { "value": "youth", "label": "20~30대" },
+          { "value": "middle", "label": "40~50대" },
+          { "value": "family", "label": "가족 단위" },
+          { "value": "worker", "label": "직장인" },
+          { "value": "tourist", "label": "관광객" }
+        ],
+        "required": false,
+        "skippable": true
+      },
+      {
+        "id": "q5",
+        "order": 5,
+        "text": "메인 색깔은 어떤 느낌이면 좋을까요?",
+        "type": "choice",
+        "category": "style",
+        "options": [
+          { "value": "warm", "label": "따뜻한 빨강·주황 계열" },
+          { "value": "cool", "label": "시원한 파랑·초록 계열" },
+          { "value": "luxury", "label": "고급스러운 검정·금색" },
+          { "value": "natural", "label": "자연스러운 베이지·갈색" }
+        ],
+        "required": false,
+        "skippable": true
+      },
+      {
+        "id": "q6",
+        "order": 6,
+        "text": "포스터에 꼭 들어가야 할 글자가 있나요?",
+        "type": "text",
+        "category": "content",
+        "placeholder": "예: 여름 한정, 15,000원, 7월 31일까지",
+        "required": false,
+        "skippable": true
+      },
+      {
+        "id": "q7",
+        "order": 7,
+        "text": "어느 곳에 붙일 포스터인가요?",
+        "type": "choice",
+        "category": "constraint",
+        "options": [
+          { "value": "window", "label": "가게 유리창" },
+          { "value": "wall", "label": "가게 내부 벽" },
+          { "value": "sns", "label": "SNS 업로드용" },
+          { "value": "flyer", "label": "전단지" }
+        ],
+        "required": false,
+        "skippable": true
+      }
+    ]
+  },
+  {
+    "id": "restaurant_review_response",
+    "domainId": "restaurant",
+    "subtype": "모든 식당",
+    "outputType": "report",
+    "name": "리뷰 답글 작성",
+    "description": "네이버·배민·카카오 리뷰에 답글 쓸 때 사용",
+    "estimatedTime": "2~4분",
+    "assemblyPromptKey": "report_review_response",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "받으신 리뷰 내용을 그대로 붙여넣어 주세요",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "리뷰 원문을 여기에 붙여넣어 주세요",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "이 리뷰는 어떤 종류인가요?",
+        "type": "choice",
+        "category": "purpose",
+        "options": [
+          { "value": "praise", "label": "칭찬 리뷰 (별 5개)" },
+          { "value": "neutral", "label": "보통 리뷰 (별 3~4개)" },
+          { "value": "complaint", "label": "불만 리뷰 (별 1~2개, 이유 있음)" },
+          { "value": "malicious", "label": "근거 없는 비방" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "불만 사항이 사실인가요?",
+        "type": "choice",
+        "category": "context",
+        "options": [
+          { "value": "true", "label": "사실입니다" },
+          { "value": "partial", "label": "일부만 사실" },
+          { "value": "false", "label": "사실과 다릅니다" },
+          { "value": "unknown", "label": "판단이 어렵습니다" }
+        ],
+        "required": false,
+        "skippable": true,
+        "dependsOn": { "questionId": "q2", "value": "complaint" }
+      },
+      {
+        "id": "q4",
+        "order": 4,
+        "text": "어떤 톤으로 답글을 쓰고 싶으세요?",
+        "type": "choice",
+        "category": "style",
+        "options": [
+          { "value": "formal", "label": "정중하고 격식 있게" },
+          { "value": "warm", "label": "친근하고 따뜻하게" },
+          { "value": "apologetic", "label": "사과하되 담백하게" },
+          { "value": "firm", "label": "단호하되 예의 있게" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q5",
+        "order": 5,
+        "text": "답글 길이는 어느 정도가 좋으세요?",
+        "type": "choice",
+        "category": "constraint",
+        "options": [
+          { "value": "short", "label": "짧게 (2~3문장)" },
+          { "value": "medium", "label": "보통 (4~6문장)" },
+          { "value": "long", "label": "길게 (7문장 이상)" }
+        ],
+        "required": false,
+        "skippable": true
+      }
+    ]
+  },
+  {
+    "id": "restaurant_instagram_post",
+    "domainId": "restaurant",
+    "subtype": "모든 식당",
+    "outputType": "image",
+    "name": "인스타그램 피드 이미지",
+    "description": "정사각형(1:1) 인스타그램 게시물용 이미지 주문서",
+    "estimatedTime": "3~5분",
+    "assemblyPromptKey": "image_instagram_square",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "어떤 메뉴나 장면을 올리고 싶으세요?",
+        "type": "text",
+        "category": "content",
+        "placeholder": "예: 시그니처 파스타, 가게 외관, 주방 장면",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "어떤 분위기로 찍고 싶으세요?",
+        "type": "choice",
+        "category": "style",
+        "options": [
+          { "value": "bright", "label": "밝고 화사한 느낌" },
+          { "value": "moody", "label": "감성적이고 무드 있는 느낌" },
+          { "value": "natural", "label": "자연스러운 일상 느낌" },
+          { "value": "luxe", "label": "고급스럽고 세련된 느낌" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "어떤 연령대를 주로 팔로우하길 원하세요?",
+        "type": "multichoice",
+        "category": "audience",
+        "options": [
+          { "value": "teen20", "label": "10~20대" },
+          { "value": "30", "label": "30대" },
+          { "value": "4050", "label": "40~50대" }
+        ],
+        "required": false,
+        "skippable": true
+      }
+    ]
+  },
+  {
+    "id": "restaurant_menu_description",
+    "domainId": "restaurant",
+    "subtype": "모든 식당",
+    "outputType": "report",
+    "name": "메뉴판 설명 문구",
+    "description": "메뉴판에 들어갈 3~5줄 침 넘어가는 설명",
+    "estimatedTime": "2~3분",
+    "assemblyPromptKey": "report_menu_description",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "메뉴 이름이 무엇인가요?",
+        "type": "text",
+        "category": "content",
+        "placeholder": "예: 갈비찜, 냉면, 된장찌개",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "주요 재료와 조리법을 알려주세요",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 국내산 소갈비를 6시간 저온으로 삶아 직접 담근 간장 양념에...",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "이 메뉴만의 특별한 점이 있나요?",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 어머니 비법 레시피, 30년 전통, 특별한 재료",
+        "required": false,
+        "skippable": true
+      },
+      {
+        "id": "q4",
+        "order": 4,
+        "text": "어떤 분들이 주로 드시나요?",
+        "type": "choice",
+        "category": "audience",
+        "options": [
+          { "value": "solo", "label": "혼자 오신 분" },
+          { "value": "couple", "label": "두 분이 오신 분" },
+          { "value": "family", "label": "가족 단위" },
+          { "value": "business", "label": "접대·비즈니스" }
+        ],
+        "required": false,
+        "skippable": true
+      }
+    ]
+  },
+  {
+    "id": "restaurant_event_flyer",
+    "domainId": "restaurant",
+    "subtype": "모든 식당",
+    "outputType": "ppt",
+    "name": "이벤트 전단지 (A4 1장)",
+    "description": "할인 이벤트·신메뉴 출시·리뉴얼 오픈 전단지",
+    "estimatedTime": "4~6분",
+    "assemblyPromptKey": "ppt_event_flyer",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "어떤 이벤트 전단지인가요?",
+        "type": "choice",
+        "category": "purpose",
+        "options": [
+          { "value": "discount", "label": "할인 행사" },
+          { "value": "newmenu", "label": "신메뉴 출시" },
+          { "value": "reopen", "label": "리뉴얼 오픈" },
+          { "value": "anniversary", "label": "기념일 이벤트" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "이벤트 기간이 언제인가요?",
+        "type": "text",
+        "category": "content",
+        "placeholder": "예: 2026년 5월 1일 ~ 5월 31일",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "핵심 혜택이나 내용을 알려주세요",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 전 메뉴 20% 할인, 음료 무료 제공, 선착순 50명",
+        "required": true,
+        "skippable": false
+      }
+    ]
+  }
+]

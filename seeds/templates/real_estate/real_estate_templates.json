@@ -1,0 +1,335 @@
+[
+  {
+    "id": "real_estate_listing_description",
+    "domainId": "real_estate",
+    "subtype": "모든 부동산",
+    "outputType": "report",
+    "name": "매물 소개 문구 작성",
+    "description": "네이버부동산·직방 등에 올릴 매력적인 매물 설명 생성",
+    "estimatedTime": "3~4분",
+    "assemblyPromptKey": "report_listing_description",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "어떤 매물인가요?",
+        "type": "choice",
+        "category": "purpose",
+        "options": [
+          { "value": "apt_sale", "label": "아파트 매매" },
+          { "value": "apt_rent", "label": "아파트 전·월세" },
+          { "value": "villa", "label": "빌라·다세대" },
+          { "value": "officetel", "label": "오피스텔" },
+          { "value": "commercial", "label": "상가·사무실" },
+          { "value": "land", "label": "토지" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "매물의 핵심 정보를 알려주세요",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 강남구 역삼동 84㎡, 15층, 남향, 매매가 12억, 2023년 준공",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "이 매물의 가장 큰 장점은 무엇인가요?",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 역세권 5분, 한강뷰, 풀옵션 신축, 초등학교 200m, 저렴한 관리비",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q4",
+        "order": 4,
+        "text": "주 타깃 고객은 누구인가요?",
+        "type": "multichoice",
+        "category": "audience",
+        "options": [
+          { "value": "newlywed", "label": "신혼부부" },
+          { "value": "family", "label": "자녀 있는 가족" },
+          { "value": "single", "label": "1~2인 가구" },
+          { "value": "investor", "label": "투자 목적" },
+          { "value": "senior", "label": "시니어·중장년" }
+        ],
+        "required": false,
+        "skippable": true
+      },
+      {
+        "id": "q5",
+        "order": 5,
+        "text": "강조하고 싶은 문구 스타일은?",
+        "type": "choice",
+        "category": "style",
+        "options": [
+          { "value": "emotional", "label": "감성적·스토리텔링" },
+          { "value": "factual", "label": "정보 중심·팩트 나열" },
+          { "value": "urgent", "label": "희소성·긴박감 강조" },
+          { "value": "lifestyle", "label": "라이프스타일 중심" }
+        ],
+        "required": false,
+        "skippable": true
+      }
+    ]
+  },
+  {
+    "id": "real_estate_customer_response",
+    "domainId": "real_estate",
+    "subtype": "모든 부동산",
+    "outputType": "report",
+    "name": "고객 문의 답변 작성",
+    "description": "전화·문자·카카오 문의에 대한 전문적인 답변 생성",
+    "estimatedTime": "2~3분",
+    "assemblyPromptKey": "report_customer_response",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "어떤 종류의 문의인가요?",
+        "type": "choice",
+        "category": "purpose",
+        "options": [
+          { "value": "price", "label": "가격·협상 가능 여부 문의" },
+          { "value": "schedule", "label": "방문·일정 조율 문의" },
+          { "value": "info", "label": "매물 상세 정보 문의" },
+          { "value": "loan", "label": "대출·자금 관련 문의" },
+          { "value": "area", "label": "주변 환경·입지 문의" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "고객이 문의한 내용을 알려주세요",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 가격 더 내려가나요? 주변 학교 어떤가요? 이번 주 토요일 방문 가능한지요",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "답변에 포함할 핵심 정보가 있나요?",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 토요일 오전 가능, 가격은 1,000만원 조정 가능, 초등학교 도보 3분 거리",
+        "required": false,
+        "skippable": true
+      },
+      {
+        "id": "q4",
+        "order": 4,
+        "text": "어떤 채널로 보낼 답변인가요?",
+        "type": "choice",
+        "category": "constraint",
+        "options": [
+          { "value": "text", "label": "문자 (짧고 간결하게)" },
+          { "value": "kakao", "label": "카카오톡 (친근하게)" },
+          { "value": "email", "label": "이메일 (격식 있게)" },
+          { "value": "platform", "label": "플랫폼 메시지 (네이버·직방)" }
+        ],
+        "required": false,
+        "skippable": true
+      }
+    ]
+  },
+  {
+    "id": "real_estate_market_report",
+    "domainId": "real_estate",
+    "subtype": "모든 부동산",
+    "outputType": "report",
+    "name": "시세·시장 분석 리포트",
+    "description": "특정 지역 부동산 시장 분석 및 고객용 리포트 작성",
+    "estimatedTime": "4~6분",
+    "assemblyPromptKey": "report_market_analysis",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "어떤 지역의 시장 분석인가요?",
+        "type": "text",
+        "category": "purpose",
+        "placeholder": "예: 서울 마포구 합정동 아파트, 경기 성남 분당구 오피스텔",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "현재 시세 및 시장 동향 정보를 알려주세요",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 합정 아파트 평균 시세 84㎡ 9~11억, 전년比 3% 하락, 거래량 소폭 증가",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "리포트 목적은 무엇인가요?",
+        "type": "choice",
+        "category": "purpose",
+        "options": [
+          { "value": "buyer", "label": "매수 고객 설득용" },
+          { "value": "seller", "label": "매도 고객 설명용" },
+          { "value": "investor", "label": "투자자 검토용" },
+          { "value": "sns", "label": "SNS 콘텐츠용" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q4",
+        "order": 4,
+        "text": "추가로 언급할 호재나 악재가 있나요?",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: GTX-A 개통 예정, 재건축 추진 중, 인근 대규모 공급 예정",
+        "required": false,
+        "skippable": true
+      }
+    ]
+  },
+  {
+    "id": "real_estate_property_photo",
+    "domainId": "real_estate",
+    "subtype": "모든 부동산",
+    "outputType": "image",
+    "name": "매물 사진 연출 가이드",
+    "description": "AI 이미지 생성 또는 사진 촬영 가이드용 프롬프트 생성",
+    "estimatedTime": "3~5분",
+    "assemblyPromptKey": "image_property_photo",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "어떤 공간을 촬영·표현할 건가요?",
+        "type": "choice",
+        "category": "purpose",
+        "options": [
+          { "value": "living", "label": "거실·메인 공간" },
+          { "value": "kitchen", "label": "주방·식당" },
+          { "value": "bedroom", "label": "침실·방" },
+          { "value": "bathroom", "label": "욕실·화장실" },
+          { "value": "exterior", "label": "외관·건물 전경" },
+          { "value": "view", "label": "뷰·조망" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "공간의 특징이나 강점을 알려주세요",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 천장고 2.8m, 대형 창문, 남향 햇살, 신축 마감재, 한강뷰",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "원하는 사진 분위기는?",
+        "type": "choice",
+        "category": "style",
+        "options": [
+          { "value": "bright", "label": "밝고 화사한 낮 분위기" },
+          { "value": "cozy", "label": "따뜻하고 아늑한 분위기" },
+          { "value": "luxury", "label": "고급스럽고 세련된 분위기" },
+          { "value": "minimal", "label": "깔끔한 미니멀 분위기" }
+        ],
+        "required": false,
+        "skippable": true
+      },
+      {
+        "id": "q4",
+        "order": 4,
+        "text": "특별히 숨기거나 보완해야 할 부분이 있나요?",
+        "type": "textarea",
+        "category": "constraint",
+        "placeholder": "예: 북향이라 어두움, 구형 욕실 타일, 좁은 주방",
+        "hint": "AI가 이 점을 보완하는 연출 방법을 제안해요",
+        "required": false,
+        "skippable": true
+      }
+    ]
+  },
+  {
+    "id": "real_estate_contract_explainer",
+    "domainId": "real_estate",
+    "subtype": "모든 부동산",
+    "outputType": "report",
+    "name": "계약 조건 쉽게 설명하기",
+    "description": "복잡한 계약 조건을 고객이 이해하기 쉬운 말로 변환",
+    "estimatedTime": "2~4분",
+    "assemblyPromptKey": "report_contract_explainer",
+    "usageCount": 0,
+    "questions": [
+      {
+        "id": "q1",
+        "order": 1,
+        "text": "어떤 계약 관련 설명이 필요한가요?",
+        "type": "choice",
+        "category": "purpose",
+        "options": [
+          { "value": "deposit", "label": "보증금·계약금·잔금 구조" },
+          { "value": "special", "label": "특약 사항 설명" },
+          { "value": "lease", "label": "전세·월세 차이 설명" },
+          { "value": "risk", "label": "위험 요소 안내" },
+          { "value": "process", "label": "계약 전체 절차 안내" }
+        ],
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q2",
+        "order": 2,
+        "text": "설명할 계약 조건이나 내용을 알려주세요",
+        "type": "textarea",
+        "category": "content",
+        "placeholder": "예: 계약금 10% + 중도금 없이 잔금 90%, 입주일 2개월 협의, 특약: 매도인 2주 내 이사",
+        "required": true,
+        "skippable": false
+      },
+      {
+        "id": "q3",
+        "order": 3,
+        "text": "고객이 특히 걱정하거나 이해 못 하는 부분이 있나요?",
+        "type": "textarea",
+        "category": "context",
+        "placeholder": "예: 전세금 반환보증 개념을 어려워함, 등기부등본 보는 법 모름",
+        "required": false,
+        "skippable": true
+      },
+      {
+        "id": "q4",
+        "order": 4,
+        "text": "설명 대상 고객은 어떤 분인가요?",
+        "type": "choice",
+        "category": "audience",
+        "options": [
+          { "value": "first", "label": "생애 첫 계약 (완전 초보)" },
+          { "value": "some", "label": "계약 경험 1~2회" },
+          { "value": "experienced", "label": "경험 많은 고객" },
+          { "value": "elderly", "label": "디지털 어려운 시니어" }
+        ],
+        "required": false,
+        "skippable": true
+      }
+    ]
+  }
+]

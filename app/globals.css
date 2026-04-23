@@ -1,26 +1,171 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
+/* ────────────────────────────────────
+   라이트 모드 (기본)
+   ──────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 60 9% 98%;
+  --foreground: 222 15% 12%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 15% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 15% 12%;
+
+  --primary: 217 19% 35%;
+  --primary-foreground: 60 9% 98%;
+  --primary-hover: 217 19% 29%;
+
+  --accent: 39 89% 46%;
+  --accent-foreground: 60 9% 98%;
+  --accent-hover: 39 87% 38%;
+  --accent-muted: 39 85% 85%;
+
+  --secondary: 95 33% 42%;
+  --secondary-foreground: 60 9% 98%;
+
+  --muted: 60 5% 96%;
+  --muted-foreground: 30 5% 35%;
+
+  --border: 20 6% 90%;
+  --input: 20 6% 90%;
+  --ring: 39 89% 46%;
+
+  --success: 142 76% 36%;
+  --success-foreground: 60 9% 98%;
+  --warning: 32 95% 44%;
+  --warning-foreground: 60 9% 98%;
+  --destructive: 0 84% 50%;
+  --destructive-foreground: 60 9% 98%;
+  --info: 199 89% 40%;
+  --info-foreground: 60 9% 98%;
+
+  --shadow-color: 222 15% 12%;
+  --radius: 0.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ────────────────────────────────────
+   다크 모드
+   ──────────────────────────────────── */
+.dark {
+  --background: 222 22% 7%;
+  --foreground: 60 5% 96%;
+
+  --card: 222 20% 11%;
+  --card-foreground: 60 5% 96%;
+  --popover: 222 20% 11%;
+  --popover-foreground: 60 5% 96%;
+
+  --primary: 220 15% 70%;
+  --primary-foreground: 222 22% 7%;
+  --primary-hover: 220 15% 78%;
+
+  --accent: 39 75% 55%;
+  --accent-foreground: 222 22% 7%;
+  --accent-hover: 39 85% 65%;
+  --accent-muted: 39 35% 20%;
+
+  --secondary: 95 25% 55%;
+  --secondary-foreground: 222 22% 7%;
+
+  --muted: 220 10% 18%;
+  --muted-foreground: 30 5% 65%;
+
+  --border: 220 10% 18%;
+  --input: 220 10% 18%;
+  --ring: 39 75% 55%;
+
+  --success: 142 70% 50%;
+  --success-foreground: 222 22% 7%;
+  --warning: 32 95% 58%;
+  --warning-foreground: 222 22% 7%;
+  --destructive: 0 72% 60%;
+  --destructive-foreground: 60 9% 98%;
+  --info: 199 89% 55%;
+  --info-foreground: 222 22% 7%;
+
+  --shadow-color: 0 0% 0%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    font-size: 16px;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html[data-font-size="large"] {
+    font-size: 18px;
+  }
+
+  html[data-font-size="xlarge"] {
+    font-size: 20px;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 200ms ease, color 200ms ease;
+    line-height: 1.625;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.4);
+    border-radius: 3px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--accent) / 0.1));
+  }
+
+  .gradient-amber {
+    background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--warning)));
+  }
+
+  .shadow-xs {
+    box-shadow: 0 1px 2px hsl(var(--shadow-color) / 0.04);
+  }
+  .shadow-sm {
+    box-shadow: 0 1px 3px hsl(var(--shadow-color) / 0.06), 0 1px 2px hsl(var(--shadow-color) / 0.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
