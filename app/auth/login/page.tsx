@@ -1,19 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { signInWithGoogle, handleRedirectResult } from '@/lib/firebase/auth';
 import { Loader2, ArrowLeft } from 'lucide-react';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirect') ?? '/studio';
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Google redirect 로그인 후 결과 처리
   useEffect(() => {
     handleRedirectResult()
       .then((user) => {
@@ -30,13 +29,52 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
     try {
-      await signInWithGoogle(); // redirect — 이 줄 이후 실행 안 됨
+      await signInWithGoogle();
     } catch {
       setError('로그인에 실패했어요. 다시 시도해 주세요.');
       setLoading(false);
     }
   }
 
+  return (
+    <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
+      <h1 className="text-xl font-bold text-foreground mb-6 text-center">로그인</h1>
+
+      {error && (
+        <div className="mb-4 rounded-lg bg-destructive/10 border border-destructive/20 p-3 text-sm text-destructive">
+          {error}
+        </div>
+      )}
+
+      <button
+        onClick={handleGoogleLogin}
+        disabled={loading}
+        className="w-full flex items-center justify-center gap-3 rounded-xl border border-border bg-background px-4 py-3.5 text-sm font-medium text-foreground hover:bg-muted transition-colors touch-target disabled:opacity-60"
+      >
+        {loading ? (
+          <Loader2 className="size-5 animate-spin text-muted-foreground" />
+        ) : (
+          <GoogleIcon />
+        )}
+        Google로 계속하기
+      </button>
+
+      <div className="mt-6 text-center text-xs text-muted-foreground">
+        로그인하면{' '}
+        <Link href="/terms" className="underline hover:text-foreground transition-colors">
+          이용약관
+        </Link>
+        과{' '}
+        <Link href="/privacy" className="underline hover:text-foreground transition-colors">
+          개인정보처리방침
+        </Link>
+        에 동의하는 것으로 간주합니다.
+      </div>
+    </div>
+  );
+}
+
+export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
       <div className="w-full max-w-sm">
@@ -49,40 +87,13 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
-          <h1 className="text-xl font-bold text-foreground mb-6 text-center">로그인</h1>
-
-          {error && (
-            <div className="mb-4 rounded-lg bg-destructive/10 border border-destructive/20 p-3 text-sm text-destructive">
-              {error}
-            </div>
-          )}
-
-          <button
-            onClick={handleGoogleLogin}
-            disabled={loading}
-            className="w-full flex items-center justify-center gap-3 rounded-xl border border-border bg-background px-4 py-3.5 text-sm font-medium text-foreground hover:bg-muted transition-colors touch-target disabled:opacity-60"
-          >
-            {loading ? (
-              <Loader2 className="size-5 animate-spin text-muted-foreground" />
-            ) : (
-              <GoogleIcon />
-            )}
-            Google로 계속하기
-          </button>
-
-          <div className="mt-6 text-center text-xs text-muted-foreground">
-            로그인하면{' '}
-            <Link href="/terms" className="underline hover:text-foreground transition-colors">
-              이용약관
-            </Link>
-            과{' '}
-            <Link href="/privacy" className="underline hover:text-foreground transition-colors">
-              개인정보처리방침
-            </Link>
-            에 동의하는 것으로 간주합니다.
+        <Suspense fallback={
+          <div className="rounded-2xl border border-border bg-card p-8 shadow-sm flex justify-center">
+            <Loader2 className="size-6 animate-spin text-muted-foreground" />
           </div>
-        </div>
+        }>
+          <LoginForm />
+        </Suspense>
 
         <div className="mt-6 text-center">
           <Link
