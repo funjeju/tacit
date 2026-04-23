@@ -16,5 +16,5 @@
     "app/api/interview/complete/route.ts": {
       "maxDuration": 120
     }
-  },
+  }
 }
